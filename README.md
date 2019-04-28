@@ -9,3 +9,8 @@ sudo docker-compose up
 sudo docker-compose run web python3 manage.py makemigrations
 sudo docker-compose run web python3 manage.py migrate
 ```
+### Shell
+```
+sudo docker container list
+sudo docker exec -it HASH bash
+```
