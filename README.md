@@ -4,9 +4,13 @@
 ```
 sudo docker-compose up
 ```
+### User
+```
+sudo docker-compose run web python3 manage.py createsuperuser 
+```
 ### Migrate
 ```
-sudo docker-compose run web python3 manage.py makemigrations
+sudo docker-compose run web python3 manage.py makemigrations quickstart
 sudo docker-compose run web python3 manage.py migrate
 ```
 ### Shell
