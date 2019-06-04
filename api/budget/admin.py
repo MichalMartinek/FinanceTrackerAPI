@@ -1,5 +1,5 @@
 from django.contrib import admin
-from api.quickstart.models import Budget
+from api.budget.models import Budget
 
 
 # Register your models here.
