@@ -1,5 +1,5 @@
 from django.contrib import admin
-from api.budget.models import Budget, BudgetLine, Category
+from api.budget.models import Budget, BudgetLine, Category, Role
 
 
 # Register your models here.
@@ -12,6 +12,9 @@ class BudgetLineAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     pass
 
+class RoleAdmin(admin.ModelAdmin):
+    pass
+
 admin.site.register(Budget, BudgetAdmin)
 admin.site.register(BudgetLine, BudgetLineAdmin)
-admin.site.register(Category, CategoryAdmin)
+admin.site.register(Role, RoleAdmin)
