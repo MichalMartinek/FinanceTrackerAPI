@@ -9,6 +9,7 @@ router = routers.DefaultRouter()
 router.register(r'users', viewsCore.UserViewSet)
 router.register(r'groups', viewsCore.GroupViewSet)
 router.register(r'budgets', viewsBudget.BudgetViewSet)
+router.register(r'categories', viewsBudget.CategoryViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

@@ -1,9 +1,7 @@
-from django.shortcuts import render
-from django.contrib.auth.models import User, Group
-from rest_framework import viewsets
+from rest_framework import viewsets, mixins
 from rest_framework.permissions import IsAuthenticated 
-from api.budget.models import Budget
-from api.budget.serializers import BudgetSerializer
+from api.budget.models import Budget, Category
+from api.budget.serializers import BudgetSerializer, CategorySerializer
 
 
 class BudgetViewSet(viewsets.ModelViewSet):
@@ -13,3 +11,8 @@ class BudgetViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,) 
     queryset = Budget.objects.all()
     serializer_class = BudgetSerializer
+
+
+class CategoryViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
