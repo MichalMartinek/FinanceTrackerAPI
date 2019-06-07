@@ -1,9 +1,26 @@
 from django.db import models
 
+class Category(models.Model):
+    code = models.CharField(max_length=128, primary_key=True,)
+
+    def __str__(self):
+        return self.code
+    class Meta:
+        verbose_name_plural = 'Categories'
+
+
 class Budget(models.Model):
     name = models.CharField(max_length=256)
+    currency = models.CharField(max_length=8)
+
+    def __str__(self):
+        return self.name
 
 class BudgetLine(models.Model):
     budget = models.ForeignKey(Budget, related_name='lines', on_delete=models.CASCADE)
     description = models.CharField(max_length=256)
-    amount = models.IntegerField()
+    category = models.ForeignKey(Category, related_name='lines', null=True, on_delete=models.SET_NULL)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f'{self.budget} - {self.id}'
