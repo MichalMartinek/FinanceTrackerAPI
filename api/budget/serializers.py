@@ -51,3 +51,29 @@ class BudgetSerializer(serializers.HyperlinkedModelSerializer):
         instance.modified_by = self.context['request'].user
         instance.save()
         return instance
+
+
+class CreateRoleSerializer(serializers.Serializer):
+    user_id = serializers.IntegerField()
+    budget_id = serializers.IntegerField()
+    rel = serializers.ChoiceField(choices=[item.value for item in RoleTypes], default=RoleTypes.ADMIN.value)
+
+    class Meta:
+        model = Role
+        fields = ('user', 'rel', 'budget')
+    @atomic
+    def create(self, validated_data):
+        print(validated_data)
+        instance = Role(rel=validated_data['rel'])
+        instance.user_id = validated_data['user_id']
+        instance.budget_id = validated_data['budget_id']
+        instance.save()
+        return instance
+
+    @atomic
+    def update(self, instance, validated_data):
+        instance.rel = validated_data['rel']
+        instance.user_id = validated_data['user_id']
+        instance.budget_id = validated_data['budget_id']
+        instance.save()
+        return instance
