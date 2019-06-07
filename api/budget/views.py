@@ -1,7 +1,7 @@
 from rest_framework import viewsets, mixins
 from rest_framework.permissions import IsAuthenticated 
-from api.budget.models import Budget, Category, Role
-from api.budget.serializers import BudgetSerializer, CategorySerializer, CreateRoleSerializer
+from api.budget.models import Budget, BudgetLine, Category, Role
+from api.budget.serializers import BudgetSerializer, CreateBudgetLineSerializer, CategorySerializer, CreateRoleSerializer
 
 
 class BudgetViewSet(viewsets.ModelViewSet):
@@ -20,3 +20,7 @@ class CategoryViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
 class CreateRoleViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin,  mixins.UpdateModelMixin, mixins.DestroyModelMixin, viewsets.GenericViewSet):
     queryset = Role.objects.all()
     serializer_class = CreateRoleSerializer
+
+class BudgetLineViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin,  mixins.UpdateModelMixin, mixins.DestroyModelMixin, viewsets.GenericViewSet):
+    queryset = BudgetLine.objects.all()
+    serializer_class = CreateBudgetLineSerializer

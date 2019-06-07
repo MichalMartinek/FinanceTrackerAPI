@@ -77,3 +77,31 @@ class CreateRoleSerializer(serializers.Serializer):
         instance.budget_id = validated_data['budget_id']
         instance.save()
         return instance
+
+
+class CreateBudgetLineSerializer(serializers.Serializer):
+    budget_id = serializers.IntegerField()
+    category_id = serializers.CharField()
+    description = serializers.CharField(max_length=256)
+    amount = serializers.DecimalField(max_digits=10, decimal_places=2)
+
+    class Meta:
+        model = BudgetLine
+        fields = ('description', 'amount', 'category', 'budget')
+    @atomic
+    def create(self, validated_data):
+        print(validated_data)
+        instance = BudgetLine(description=validated_data['description'], amount=validated_data['amount'])
+        instance.category_id = validated_data['category_id']
+        instance.budget_id = validated_data['budget_id']
+        instance.save()
+        return instance
+
+    @atomic
+    def update(self, instance, validated_data):
+        instance.description = validated_data['description']
+        instance.amount = validated_data['amount']
+        instance.category_id = validated_data['category_id']
+        instance.budget_id = validated_data['budget_id']
+        instance.save()
+        return instance
