@@ -12,6 +12,7 @@ router.register(r'budgets', viewsBudget.BudgetViewSet)
 router.register(r'categories', viewsBudget.CategoryViewSet)
 router.register(r'roles', viewsBudget.CreateRoleViewSet)
 router.register(r'lines', viewsBudget.BudgetLineViewSet)
+router.register(r'my-budgets', viewsBudget.MyBudgetsViewSet, basename='Role')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

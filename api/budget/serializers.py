@@ -36,6 +36,7 @@ class BudgetSerializer(serializers.HyperlinkedModelSerializer):
 
     @atomic
     def create(self, validated_data):
+        print(self.context['request'].user.budgets)
         usr = self.context['request'].user
         validated_data["modified_by"] = usr
         budget = Budget.objects.create(**validated_data)
@@ -51,6 +52,13 @@ class BudgetSerializer(serializers.HyperlinkedModelSerializer):
         instance.modified_by = self.context['request'].user
         instance.save()
         return instance
+
+class BudgetWithRoleSerializer(serializers.Serializer):
+    budget = BudgetSerializer(read_only=True)
+
+    class Meta:
+        model = Role
+        fields = ('budget', 'rel')
 
 
 class CreateRoleSerializer(serializers.Serializer):
