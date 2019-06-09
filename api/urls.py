@@ -7,7 +7,6 @@ from api.budget import views as viewsBudget
 
 router = routers.DefaultRouter()
 router.register(r'users', viewsCore.UserViewSet)
-router.register(r'groups', viewsCore.GroupViewSet)
 router.register(r'budgets', viewsBudget.BudgetViewSet)
 router.register(r'categories', viewsBudget.CategoryViewSet)
 router.register(r'roles', viewsBudget.CreateRoleViewSet)
