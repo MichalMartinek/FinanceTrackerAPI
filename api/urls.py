@@ -1,4 +1,5 @@
 from django.urls import include, path
+from django.conf.urls import url
 from django.contrib import admin
 from rest_framework import routers
 from rest_framework.authtoken.views import obtain_auth_token
@@ -16,6 +17,7 @@ router.register(r'my-budgets', viewsBudget.MyBudgetsViewSet, basename='Role')
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
+    url(r'^search-user/(?P<query>.+)$', viewsCore.SearchUserView.as_view(), name='search-user'),
     path('', include(router.urls)),
     path('api-auth/', obtain_auth_token, name='api_token_auth'),
     path('admin/', admin.site.urls),
