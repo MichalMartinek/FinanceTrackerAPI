@@ -1,8 +1,8 @@
-from rest_framework import viewsets, mixins
+from rest_framework import views, viewsets, mixins
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated 
 from api.budget.models import Budget, BudgetLine, Category, Role
-from api.budget.serializers import BudgetSerializer, BudgetWithRoleSerializer, CreateBudgetLineSerializer, CategorySerializer, CreateRoleSerializer
+from api.budget.serializers import BudgetSerializer, ProfileWithBudgetsSerializer, CreateBudgetLineSerializer, CategorySerializer, CreateRoleSerializer
 
 
 class BudgetViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin,  mixins.UpdateModelMixin, mixins.DestroyModelMixin, viewsets.GenericViewSet):
@@ -26,7 +26,7 @@ class BudgetLineViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin,  mix
     queryset = BudgetLine.objects.all()
     serializer_class = CreateBudgetLineSerializer
 
-class MyBudgetsViewSet(viewsets.ViewSet):
-    def list(self, request):
-        serializer = BudgetWithRoleSerializer(self.request.user.budgets, many=True, context={'request': request})
+class ProfileWithBudgetsView(views.APIView):
+    def get(self, request):
+        serializer = ProfileWithBudgetsSerializer(self.request.user, context={'request': request})
         return Response(serializer.data)

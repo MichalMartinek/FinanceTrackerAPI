@@ -27,7 +27,7 @@ class BudgetLineSerializer(serializers.HyperlinkedModelSerializer):
 class BudgetSerializer(serializers.HyperlinkedModelSerializer):
     lines = BudgetLineSerializer(many=True, read_only=True)
     users = RoleSerializer(many=True, read_only=True)
-    modified_by = UserSerializer( read_only=True)
+    modified_by = UserSerializer(read_only=True)
 
     class Meta:
         model = Budget
@@ -55,11 +55,17 @@ class BudgetSerializer(serializers.HyperlinkedModelSerializer):
 
 class BudgetWithRoleSerializer(serializers.Serializer):
     budget = BudgetSerializer(read_only=True)
+    rel = serializers.CharField(read_only=True)
 
     class Meta:
         model = Role
         fields = ('budget', 'rel')
 
+class ProfileWithBudgetsSerializer(serializers.HyperlinkedModelSerializer):
+    budgets = BudgetWithRoleSerializer(many=True, read_only=True)
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email', 'budgets')
 
 class CreateRoleSerializer(serializers.Serializer):
     user_id = serializers.IntegerField()
