@@ -15,14 +15,15 @@ class RoleSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Role
-        fields = ('user', 'rel')
+        fields = ('user', 'rel', 'id')
 
 class BudgetLineSerializer(serializers.HyperlinkedModelSerializer):
     category = CategorySerializer(many=False, read_only=True)
 
     class Meta:
         model = BudgetLine
-        fields = ('description', 'amount', 'category',)
+        fields = ('description', 'amount', 'category', 'date_created', 'id')
+        read_only_fields = ('id', 'date_created')
 
 class BudgetSerializer(serializers.HyperlinkedModelSerializer):
     lines = BudgetLineSerializer(many=True, read_only=True)

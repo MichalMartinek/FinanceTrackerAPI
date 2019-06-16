@@ -25,6 +25,7 @@ class Budget(models.Model):
 class BudgetLine(models.Model):
     budget = models.ForeignKey(Budget, related_name='lines', on_delete=models.CASCADE)
     description = models.CharField(max_length=256)
+    date_created = models.DateTimeField(auto_now_add=True)
     category = models.ForeignKey(Category, related_name='lines', null=True, on_delete=models.SET_NULL)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
 

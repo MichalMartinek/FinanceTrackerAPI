@@ -18,3 +18,4 @@ class RoleAdmin(admin.ModelAdmin):
 admin.site.register(Budget, BudgetAdmin)
 admin.site.register(BudgetLine, BudgetLineAdmin)
 admin.site.register(Role, RoleAdmin)
+admin.site.register(Category, CategoryAdmin)
